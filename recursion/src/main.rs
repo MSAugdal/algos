@@ -1,3 +1,7 @@
 fn main() {
-    println!("Hello, world!");
+    factorial(5);
+}
+
+fn factorial(_num: usize) -> usize {
+    todo!("factorial fn");
 }

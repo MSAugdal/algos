@@ -1,7 +1,10 @@
 fn main() {
-    factorial(5);
+    dbg!(factorial(3));
 }
 
-fn factorial(_num: usize) -> usize {
-    todo!("factorial fn");
+fn factorial(num: usize) -> usize {
+    match num {
+        1 => 1,
+        _ => num * factorial(num - 1),
+    }
 }

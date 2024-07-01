@@ -3,7 +3,7 @@ fn main() {
     let vec_list = vec![list];
 
     dbg!(sum(&list));
-    dbg!(num_of_items_in_list(&list));
+    dbg!(num_of_items_in_list(&list, None));
     dbg!(max_num_in_list(&list));
     dbg!(recursive_binary_search(&vec_list));
 }
@@ -20,8 +20,11 @@ fn sum(num_list: &[usize]) -> usize {
 
 // exercise 4.2: write a recursive function to count the number of items in a list.
 // Grokking algorithms: page 123
-fn num_of_items_in_list<T>(_list: &[T]) -> usize {
-    todo!("num_of_items_in_list fn");
+fn num_of_items_in_list<T>(list: &[T], sum: Option<usize>) -> usize {
+    match list.get(0) {
+        None => sum.unwrap(),
+        Some(_) => num_of_items_in_list(&list[1..], Some(sum.unwrap_or(0) + 1)),
+    }
 }
 
 // exercise 4.3: find the maximum number in a list

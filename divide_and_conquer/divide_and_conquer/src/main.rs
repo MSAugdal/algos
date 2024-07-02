@@ -57,7 +57,7 @@ fn recursive_binary_search<T: std::cmp::PartialEq + std::cmp::PartialOrd>(
 ) -> Option<usize> {
     let mid = (high + low) / 2;
     if list[mid] == item {
-        Some((high + low) / 2)
+        Some(mid)
     } else if high <= low || high == 0 {
         None
     } else if list[mid] < item {

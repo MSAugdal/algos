@@ -4,7 +4,7 @@ fn main() {
 
     dbg!(sum(&list));
     dbg!(num_of_items_in_list(&list, None));
-    dbg!(max_num_in_list(&list));
+    dbg!(max_num_in_list(&list, None));
     dbg!(recursive_binary_search(&vec_list));
 }
 
@@ -29,8 +29,17 @@ fn num_of_items_in_list<T>(list: &[T], sum: Option<usize>) -> usize {
 
 // exercise 4.3: find the maximum number in a list
 // Grokking algorithms: page 123
-fn max_num_in_list<T>(_list: &[T]) -> usize {
-    todo!("max_num_in_list");
+fn max_num_in_list(list: &[usize], num: Option<usize>) -> usize {
+    match list.get(0) {
+        None => num.unwrap(),
+        Some(new_num) => {
+            if new_num > &num.unwrap_or(0) {
+                max_num_in_list(&list[1..], Some(*new_num))
+            } else {
+                max_num_in_list(&list[1..], Some(num.unwrap()))
+            }
+        }
+    }
 }
 
 // exercise 4.4: Can you come up with a basecase and recursive case for binary search?

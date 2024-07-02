@@ -1,11 +1,16 @@
 fn main() {
     let list = [10, 102, 4, 52, 2, 16];
-    let vec_list = vec![list];
+    let vec_list = Vec::from(list);
+    let mut sorted_vec_list = vec_list.clone();
+    sorted_vec_list.sort();
 
     dbg!(sum(&list));
     dbg!(num_of_items_in_list(&list, None));
     dbg!(max_num_in_list(&list, None));
-    dbg!(recursive_binary_search(&vec_list));
+    assert_eq!(
+        recursive_binary_search(&sorted_vec_list, 52usize, 0, sorted_vec_list.len() - 1),
+        Some(4)
+    );
 }
 
 // exercise 4.1: write out the code for the earlier SUM function
@@ -44,6 +49,20 @@ fn max_num_in_list(list: &[usize], num: Option<usize>) -> usize {
 
 // exercise 4.4: Can you come up with a basecase and recursive case for binary search?
 // Grokking algorithms: page 123
-fn recursive_binary_search<T>(_list: &Vec<T>) -> Vec<T> {
-    todo!("recursive_binary_search");
+fn recursive_binary_search<T: std::cmp::PartialEq + std::cmp::PartialOrd>(
+    list: &Vec<T>,
+    item: T,
+    low: usize,
+    high: usize,
+) -> Option<usize> {
+    let mid = (high + low) / 2;
+    if list[mid] == item {
+        Some((high + low) / 2)
+    } else if high <= low || high == 0 {
+        None
+    } else if list[mid] < item {
+        recursive_binary_search(list, item, mid + 1, high)
+    } else {
+        recursive_binary_search(list, item, low, mid - 1)
+    }
 }

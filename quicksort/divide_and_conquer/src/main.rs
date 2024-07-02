@@ -27,7 +27,7 @@ fn sum(num_list: &[usize]) -> usize {
 // Grokking algorithms: page 123
 fn num_of_items_in_list<T>(list: &[T], sum: Option<usize>) -> usize {
     match list.get(0) {
-        None => sum.unwrap(),
+        None => sum.unwrap_or(0),
         Some(_) => num_of_items_in_list(&list[1..], Some(sum.unwrap_or(0) + 1)),
     }
 }

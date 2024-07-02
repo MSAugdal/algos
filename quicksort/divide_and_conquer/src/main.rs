@@ -36,7 +36,7 @@ fn num_of_items_in_list<T>(list: &[T], sum: Option<usize>) -> usize {
 // Grokking algorithms: page 123
 fn max_num_in_list(list: &[usize], num: Option<usize>) -> usize {
     match list.get(0) {
-        None => num.unwrap(),
+        None => num.unwrap_or(0),
         Some(new_num) => {
             if new_num > &num.unwrap_or(0) {
                 max_num_in_list(&list[1..], Some(*new_num))

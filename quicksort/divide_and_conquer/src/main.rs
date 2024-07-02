@@ -4,9 +4,9 @@ fn main() {
     let mut sorted_vec_list = vec_list.clone();
     sorted_vec_list.sort();
 
-    dbg!(sum(&list));
-    dbg!(num_of_items_in_list(&list, None));
-    dbg!(max_num_in_list(&list, None));
+    assert_eq!(sum(&list), 186);
+    assert_eq!(num_of_items_in_list(&list, None), 6);
+    assert_eq!(max_num_in_list(&list, None), 102);
     assert_eq!(
         recursive_binary_search(&sorted_vec_list, 52usize, 0, sorted_vec_list.len() - 1),
         Some(4)
